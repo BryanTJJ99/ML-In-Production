@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app-stable:
+    image: team21:stable
+    ports:
+      - "8083:5000"  # Map port 5000 inside the container to port 8083 on the host
+    deploy:
+      replicas: 1  # Only one instance of the stable version
+      restart_policy:
+        condition: on-failure  # Do not automatically restart this service

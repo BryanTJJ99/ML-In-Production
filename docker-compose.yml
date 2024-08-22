@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  app:
+    image: team21:latest
+    ports:
+      - "8084:5000"  # Map port 5000 inside the container to port 8082 on the host
+    deploy:
+      replicas: 2  # Start with 2 instances for high availability
+      update_config:
+        parallelism: 1  # Update one replica at a time
+        delay: 10s  # Wait 10 seconds between updates
+        order: start-first  # Start new containers before stopping the old ones
+      restart_policy:
+        condition: on-failure
